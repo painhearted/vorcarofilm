@@ -8,3 +8,13 @@ Este projeto está sendo desenvolvido como parte do meu aprendizado e prática c
 - React
 - HTML
 - CSS
+
+
+Funcionalidades:
+Consulta de filmes em cartaz
+Visualização de informações dos filmes
+Página de detalhes de cada filme
+Exibição de sinopse e avaliação
+Navegação entre páginas
+Página de erro para páginas não encontradas
+Indicador de carregamento durante as requisições

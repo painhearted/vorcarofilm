@@ -20,3 +20,19 @@ Este projeto está sendo desenvolvido como parte do meu aprendizado e prática c
 - Navegação entre páginas
 - Página de erro para páginas não encontradas
 - Indicador de carregamento durante as requisições
+- Salvamento de filmes no localStorage
+- Visualização dos filmes salvos em uma lista
+- Remoção de filmes salvos
+- Notificações de ações realizadas
+- Redirecionamento para busca de ingressos
+
+## Tecnologias
+
+- JavaScript
+- React
+- React Router
+- Axios
+- React Toastify
+- HTML
+- CSS
+- API do TMDB

@@ -1,10 +1,14 @@
 import { useEffect, useState} from 'react';
-import { useParams} from 'react-router-dom';
+import { useParams, useNavigate} from 'react-router-dom';
 import api, {apiKey} from '../services/api'
+import './filme-info.css';
+import {toast} from 'react-toastify';
 
 function Filme() {
 
     const { id } = useParams();
+    const navigate = useNavigate();
+
     const [filme, setFilme] = useState({});
     const [loading, setLoading] = useState(true);
 
@@ -28,6 +32,8 @@ function Filme() {
             .catch(() => {
 
                 console.log("FILME NÃO ENCONTRADO!");
+                navigate("/", {replace: true});
+                return;
             })
 
         }
@@ -35,11 +41,29 @@ function Filme() {
         loadingFilme();
 
 
-        //return () => {
+    }, [navigate, id])
 
-            //console.log("COMPONENTE DESMONTADO")
-        //}
-    }, [])
+
+    function salvarFilme() {
+
+        const minhaLista = localStorage.getItem("@vorcarofilm")
+
+        let filmeSalvo = JSON.parse(minhaLista) || [];
+
+        const hasFilme = filmeSalvo.some( (filmesSalvos) => filmesSalvos.id === filme.id)
+
+
+        if(hasFilme) {
+
+            toast.warn("Esse filme já está na sua lista!")
+            return;
+        }
+
+        filmeSalvo.push(filme);
+        localStorage.setItem("@vorcarofilm", JSON.stringify(filmeSalvo));
+        toast.success("Filme salvo com sucesso!")
+
+    }
 
     if (loading) {
 
@@ -62,6 +86,15 @@ function Filme() {
             <span>{filme.overview}</span>
 
             <strong>Avaliação: {filme.vote_average} / 10</strong>
+
+            <div className="area-buttons">
+                <button onClick={salvarFilme}>Salvar</button>
+                <button>
+                    <a target="blank" rel="external" href={`https://www.google.com/search?q=${filme.title} Ingresso`}>
+                        Ingresso
+                    </a>
+                </button>
+            </div>
         </div>
     )
 }
